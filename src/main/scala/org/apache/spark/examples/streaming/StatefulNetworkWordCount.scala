@@ -43,7 +43,7 @@ object StatefulNetworkWordCount {
 
     StreamingExamples.setStreamingLogLevels()
 
-    val sparkConf = new SparkConf().setAppName("StatefulNetworkWordCount").setMaster("local[3]")
+    val sparkConf = new SparkConf().setAppName("StatefulNetworkWordCount")
     // Create the context with a 1 second batch size
     val ssc = new StreamingContext(sparkConf, Seconds(1))
     ssc.checkpoint("./checkpoint/statful")
