@@ -1,5 +1,5 @@
 # Spark-Examples
-It's a runnable project of Spark-Examples, and we have dealed with the maven dependences, and extended some test cases in ```org.spache.spark.examples.mine``` package.
+It's a runnable project of Spark-Examples 2.4.0, and we have dealed with the maven dependences, and extended some test cases in ```org.spache.spark.examples.mine``` package.
 
 ## Run Examples
 1. Clone the repo into InteliJ, and create a maven project
