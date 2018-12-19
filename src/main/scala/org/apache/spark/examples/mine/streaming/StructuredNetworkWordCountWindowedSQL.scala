@@ -72,6 +72,15 @@ object StructuredNetworkWordCountWindowedSQL {
 
     import spark.implicits._
 
+    val userDF = spark.read
+      .format("jdbc")
+      .option("url", "jdbc:mysql://127.0.0.1:3306/stream")
+      .option("dbtable", "stream.user")
+      .option("user", "atom")
+      .option("password", "atom")
+      .load().createOrReplaceTempView("users")
+
+
     // Create DataFrame representing the stream of input lines from connection to host:port
     val lines = spark.readStream
       .format("socket")
@@ -96,7 +105,12 @@ object StructuredNetworkWordCountWindowedSQL {
             |window(timestamp, '$windowDuration', '$slideDuration') as win
             |,word
             |,count(1) as cnt
-          |from words_view
+            |,max(b.email) as email
+            |,rand() as ct
+          |from
+            |words_view a
+            |join users b
+            |on(a.word = b.username)
           |group by win,word
           |order by win""".stripMargin)
 
